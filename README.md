@@ -29,6 +29,8 @@ Ao final do processamento, o valor da variável `SUM` será 91.
 
 Dado um número, o programa verifica se ele pertence à sequência de Fibonacci.
 ```typescript
+import * as readline from 'readline';
+
 function isFibonacci(n: number): boolean {
     let a = 0, b = 1;
     while (b < n) {
@@ -38,12 +40,20 @@ function isFibonacci(n: number): boolean {
 }
 
 function mainFibonacci(): void {
-    const number = parseInt(prompt("Enter a number: ") || "0", 10);
-    if (isFibonacci(number)) {
-        console.log(`The number ${number} belongs to the Fibonacci sequence.`);
-    } else {
-        console.log(`The number ${number} does not belong to the Fibonacci sequence.`);
-    }
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    rl.question("Enter a number: ", (answer) => {
+        const number = parseInt(answer, 10);
+        if (isFibonacci(number)) {
+            console.log(`The number ${number} belongs to the Fibonacci sequence.`);
+        } else {
+            console.log(`The number ${number} does not belong to the Fibonacci sequence.`);
+        }
+        rl.close();
+    });
 }
 
 mainFibonacci();
@@ -126,6 +136,8 @@ mainPercentage();
 O programa inverte os caracteres de uma string sem usar funções prontas.
 
 ```typescript
+import * as readline from 'readline';
+
 function reverseString(s: string): string {
     let reversedS = "";
     for (const char of s) {
@@ -135,8 +147,15 @@ function reverseString(s: string): string {
 }
 
 function mainReverse(): void {
-    const string = prompt("Enter a string: ") || "";
-    console.log(`Reversed string: ${reverseString(string)}`);
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    rl.question("Enter a string: ", (answer) => {
+        console.log(`Reversed string: ${reverseString(answer)}`);
+        rl.close();
+    });
 }
 
 mainReverse();
@@ -151,22 +170,19 @@ mainReverse();
    ```bash
    npm install
    ```
-5. Execute os scripts conforme necessário:
+5. Execute o script principal:
    ```bash
-   npx ts-node problem1.ts
-   npx ts-node problem2.ts
-   npx ts-node problem3.ts
-   npx ts-node problem4.ts
-   npx ts-node problem5.ts
+   npm start
    ```
 
 ## Estrutura do Projeto
 
-- `problem1.ts`: Solução para o problema 1.
-- `problem2.ts`: Solução para o problema 2.
-- `problem3.ts`: Solução para o problema 3.
-- `problem4.ts`: Solução para o problema 4.
-- `problem5.ts`: Solução para o problema 5.
+- `src/index.ts`: Arquivo principal que executa todos os problemas em cascata.
+- `src/problem1.ts`: Solução para o problema 1.
+- `src/problem2.ts`: Solução para o problema 2.
+- `src/problem3.ts`: Solução para o problema 3.
+- `src/problem4.ts`: Solução para o problema 4.
+- `src/problem5.ts`: Solução para o problema 5.
 - `package.json`: Arquivo de configuração do projeto.
 - `.gitignore`: Arquivo para ignorar arquivos desnecessários no Git.
 
